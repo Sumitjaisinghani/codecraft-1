@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void reverse_stack(int stack[], int *top) {
+    int temp_stack[MAX_SIZE];
+    int temp_top = 0;
+
+    // Pop all elements from the original stack and push them onto the temp_stack
+    while (*top >= 0) {
+        temp_stack[temp_top++] = stack[(*top)--];
+    }
+
+    // Pop all elements from the temp_stack and push them back onto the original stack
+    while (temp_top > 0) {
+        stack[++(*top)] = temp_stack[--temp_top];
+    }
+}
+
+int main() {
+    int stack[MAX_SIZE] = {1, 2, 3, 4, 5};
+    int top = 4; // Initialize top to the last index of the stack
+
+    reverse_stack(stack, &top);
+
+    // Print the reversed stack
+    for (int i = 0; i <= top; i++) {
+        printf("%d ", stack[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
