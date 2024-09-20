@@ -1,0 +1,41 @@
+class Graph:
+    def __init__(self):
+        self.adj_list = {}
+
+    def add_edge(self, src, dest):
+        if src not in self.adj_list:
+            self.adj_list[src] = []
+        self.adj_list[src].append(dest)
+
+    def dfs(self, start, visited=None):
+        if visited is None:
+            visited = set()
+        visited.add(start)
+        print(start, end=", ")
+
+        for neighbor in self.adj_list.get(start, []):
+            if neighbor not in visited:
+                self.dfs(neighbor, visited)
+
+    def dfs_traversal(self, start):
+        print("DFS Traversal starting from", start, ":")
+        self.dfs(start)
+        print()
+
+# Create a graph
+graph = Graph()
+graph.add_edge('A', 'B')
+graph.add_edge('A', 'C')
+graph.add_edge('B', 'A')
+graph.add_edge('B', 'D')
+graph.add_edge('B', 'E')
+graph.add_edge('C', 'A')
+graph.add_edge('C', 'F')
+graph.add_edge('D', 'B')
+graph.add_edge('E', 'B')
+graph.add_edge('E', 'F')
+graph.add_edge('F', 'C')
+graph.add_edge('F', 'E')
+
+# Perform DFS traversal
+graph.dfs_traversal('A')
